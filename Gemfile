@@ -33,6 +33,7 @@ gem 'devise'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'friendly_id'
+gem "paranoia", "~> 2.2"
 gem 'sidekiq'
 
 group :development, :test do
