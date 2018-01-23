@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PostApp</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>PostApp</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-  	<% if user_signed_in? %>
+<body>
+  <% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <% if user_signed_in? %>
   <li>
-  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
   </li>
-    <li>
-  <%= link_to('Edit registration', edit_user_registration_path) %>
-  </li>
-<% else %>
   <li>
-  <%= link_to('Login', new_user_session_path)  %>  
+    <%= link_to('Edit registration', edit_user_registration_path) %>
   </li>
+  <% else %>
+  <li>
+    <%= link_to('Login', new_user_session_path)  %>  
+  </li>
+  <li>
+    <%= link_to('Register', new_user_registration_path)  %>
+  </li>
+  <% end %>
+  <ul>
     <li>
-  <%= link_to('Register', new_user_registration_path)  %>
-  </li>
-<% end %>
-<ul>
-<li>
-<%= link_to 'Users', users_path %>
-</li>
-<li>
-<%= link_to 'Posts', posts_path %>
-</li>	
-</ul>
-    <%= yield %>
-  </body>
+      <%= link_to 'Users', users_path %>
+    </li>
+    <li>
+      <%= link_to 'Posts', posts_path %>
+    </li>	
+  </ul>
+  <%= yield %>
+</body>
 </html>
