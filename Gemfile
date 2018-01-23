@@ -32,13 +32,15 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'aasm'
+gem 'apipie-rails'
 gem 'devise'
 gem 'friendly_id'
-gem "paranoia", "~> 2.2"
-gem 'sidekiq'
+gem 'mandrill_dm'
+gem 'paperclip'
+gem 'paranoia', '~> 2.2'
 gem 'paranoia_uniqueness_validator', '3.0.0'
-gem "paperclip"
-gem 'apipie-rails'
+gem 'sidekiq'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
