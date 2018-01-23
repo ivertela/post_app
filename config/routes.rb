@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :inbox, :controller => 'posts/inbox', :only => [:show,:create]
   devise_for :users
   resources :users
   resources :posts
