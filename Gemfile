@@ -38,6 +38,7 @@ gem "paranoia", "~> 2.2"
 gem 'sidekiq'
 gem 'paranoia_uniqueness_validator', '3.0.0'
 gem "paperclip"
+gem 'apipie-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
