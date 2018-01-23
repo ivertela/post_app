@@ -4,7 +4,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @my_posts = Post.where(user_id: current_user.id)
+    @all_posts = Post.posted
   end
 
   # GET /posts/1
@@ -19,6 +20,13 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+  end
+
+  def published
+    @post = Post.find(params[:post_id])
+    @post.published!
+    @post.user.increment!(:posted_post_count)
+    redirect_to posts_url, notice: 'Post was published.'
   end
 
   # POST /posts

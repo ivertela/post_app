@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123091336) do
+ActiveRecord::Schema.define(version: 20180123111844) do
 
   create_table "friendly_id_slugs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "slug", null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20180123091336) do
     t.string "slug"
     t.datetime "deleted_at"
     t.bigint "user_id"
+    t.string "aasm_state"
     t.index ["deleted_at"], name: "index_posts_on_deleted_at"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -57,6 +58,7 @@ ActiveRecord::Schema.define(version: 20180123091336) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.datetime "deleted_at"
+    t.integer "posted_post_count"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
