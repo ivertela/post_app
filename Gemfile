@@ -35,6 +35,7 @@ gem 'devise'
 gem 'friendly_id'
 gem "paranoia", "~> 2.2"
 gem 'sidekiq'
+gem 'paranoia_uniqueness_validator', '3.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
