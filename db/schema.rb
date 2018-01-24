@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20180123123231) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.datetime "deleted_at"
-    t.integer "posted_post_count"
+    t.integer "posted_post_count", default: 0
     t.string "avatar_file_name"
     t.string "avatar_content_type"
     t.integer "avatar_file_size"

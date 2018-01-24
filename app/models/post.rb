@@ -5,10 +5,15 @@ class Post < ApplicationRecord
 	friendly_id :title, use: [:slugged, :finders]
 	validates_presence_of :title, :description, :user_id
 	before_destroy :update_user_count!
-
+	# after_create :send_notification
 	def update_user_count!
 		self.user.decrement!(:posted_post_count)
 	end
+
+	# def send_notification
+	# 	PostNotificationMailer.notify_user(email: self.user.email, title: self.title, text: self.description).deliver_later
+	# end
+
 
 	include AASM
 
