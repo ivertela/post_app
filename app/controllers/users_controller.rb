@@ -66,14 +66,24 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
+
+    @user.really_destroy!
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'User was successfully realy_destroyed.' }
       format.json { head :no_content }
     end
   end
 
-  private
+  def soft_delete
+    @user = User.find(params[:user_id])
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User was soft destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

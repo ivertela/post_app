@@ -7,7 +7,8 @@ class Post < ApplicationRecord
 	before_destroy :update_user_count!
 	# after_create :send_notification
 	def update_user_count!
-		self.user.decrement!(:posted_post_count)
+		@user = self.user
+		@user.posted_post_count >= 1 ? @user.decrement!(:posted_post_count) : @user.update(posted_post_count: 0) 
 	end
 
 	# def send_notification

@@ -1,34 +1,40 @@
 class User < ApplicationRecord
+  acts_as_paranoid without_default_scope: true
+  devise :database_authenticatable, :registerable,
+  :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  
   has_many :posts, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  acts_as_paranoid column: :active, sentinel_value: true
 
-  validates :name, presence: true
-  validates :email, presence: true, uniqueness: { conditions: -> { User.with_deleted } }
+  validates_presence_of :email, :avatar, :name, presence: true
+  validates :email, uniqueness: true
 
+  validate :is_unique_from_all_entries, on: :create
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders]
+  after_restore :update_deleted_at
 
+  def active_for_authentication?
+   super && !self.deleted?
+ end
 
-  def paranoia_restore_attributes
-    {
-      deleted_at: nil,
-      active: true
-    }
+ def update_deleted_at
+  self.update(deleted_at: nil)
+ end
+ def is_unique_from_all_entries
+  test = User.with_deleted.find_by(email: email)
+  if test.present?
+    if test.deleted_at.nil?
+      errors.add(:email, "is already used.") 
+    else
+      errors.add(:email, "is soft deleted.") 
+    end
   end
-
-  def paranoia_destroy_attributes
-    {
-      deleted_at: current_time_from_proper_timezone,
-      active: nil
-    }
-  end
+end
 
 end

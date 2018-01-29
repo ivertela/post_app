@@ -37,7 +37,8 @@ gem 'devise'
 gem 'friendly_id'
 # gem 'mandrill-api'
 gem 'paperclip'
-gem 'paranoia', '~> 2.2'
+gem 'paranoia_uniqueness_validator', '3.0.0'
+gem 'paranoia', '~> 2.4'
 gem 'sidekiq'
 
 

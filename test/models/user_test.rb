@@ -1,21 +1,42 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+	def setup
+		@user = users(:valid)
+		@user.update(avatar: File.open(Rails.root.join('test', 'fixtures', 'files', 'qwe.jpg') ))
+	end
 	test 'valid user' do
-		user = User.new
-		# (name: 'John', email: 'john@example.com')
-		assert_not user.save
+		assert @user.valid?
 	end
 
-	# test 'invalid without name' do
-	# 	user = User.new(email: 'john@example.com')
-	# 	refute user.valid?, 'user is valid without a name'
-	# 	assert_not_nil user.errors[:name], 'no validation error for name present'
-	# end
+	test 'invalid without name' do
+		@user.name = nil
+		refute @user.valid?, 'user is valid without a name'
+		assert_not_nil @user.errors[:name], 'no validation error for name present'
+	end
 
-	# test 'invalid without email' do
-	# 	user = User.new(name: 'John')
-	# 	refute user.valid?
-	# 	assert_not_nil user.errors[:email]
-	# end
+	test 'invalid without email' do
+		@user.email = nil
+		refute @user.valid?
+		assert_not_nil @user.errors[:email]
+	end
+
+	test 'invalid without avatar' do
+		@user.update(avatar: file_fixture('qwe.jpg').open)
+		assert @user.avatar.present?, @user.errors[:avatar]
+	end
+
+
+	test '#posts' do
+		assert_not_equal 0, @user.posts.size
+	end
+	test 'paranoia test' do
+		@user.destroy
+		assert @user.deleted? , 'user not hide after soft destroy'
+		@user.restore
+		assert_not @user.deleted?, 'user not restore after soft destroy'
+		@user.really_destroy!
+		assert_not_includes User.all, @user, 'user not destory in database'
+	end
+
 end
