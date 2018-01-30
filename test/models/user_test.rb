@@ -22,10 +22,10 @@ class UserTest < ActiveSupport::TestCase
 		assert_not_nil @user.errors[:email], 'no validation error for email present'
 	end
 
-	test 'invalid without avatar' do
-		@user.update(avatar: file_fixture('qwe.jpg').open)
-		assert @user.avatar.present?, 'no validation error for avatar present'
-	end
+	# test 'invalid without avatar' do
+	# 	@user.update(avatar: file_fixture('qwe.jpg').open)
+	# 	assert @user.avatar.present?, 'no validation error for avatar present'
+	# end
 
 
 	# test '#posts' do

@@ -14,10 +14,7 @@ class Api::UsersController < ApplicationController
 
 
 	api :GET, "/users/:id", "Show user profile"
-	param :id, Integer, desc: "ID", required: true
-	param :name, String, desc: "Name", required: true
-	param :email, String, desc: "Email", required: true
-	param :avatar, ActionDispatch::Http::UploadedFile, desc: "User Image", required: true
+	param :id, String, desc: "ID", required: true
 	
 	def show
 		@user = User.find(params[:id])

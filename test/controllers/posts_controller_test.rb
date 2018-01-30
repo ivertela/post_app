@@ -41,10 +41,13 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update post" do
-    # @post.title = "Test title"
-    # @post.description = "Test text"
-    # patch post_url(@post), params: { post: { description: @post.description, title: @post.title } }
-    # assert_redirected_to post_url(@post)
+    updated_title = "Updated"
+    updated_description = "Updated post."
+    patch post_url(@post),  params: { post: { description: updated_description, title: updated_title } } 
+    @post.reload
+    assert_redirected_to @post
+    assert_equal updated_title, @post.title
+    assert_equal updated_description, @post.description
   end
 
   test "should destroy post" do
