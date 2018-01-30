@@ -2,8 +2,11 @@ require 'test_helper'
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+  require 'sidekiq/testing'
+  Sidekiq::Testing.fake!
+
   setup do
-    @post = posts(:one)
+    @post = posts(:valid)
     @user = users(:alice)
     @user.update(avatar: File.open(Rails.root.join('test', 'fixtures', 'files', 'qwe.jpg') ))
     sign_in @user
@@ -45,10 +48,20 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy post" do
-    # assert_difference('Post.count', -1) do
-    #   delete post_url(@post)
-    # end
-
-    # assert_redirected_to posts_url
+    Sidekiq::Testing.fake! do
+      require 'sidekiq/testing'
+      DeletePostWorker.jobs.clear
+      delete post_url(@post)
+      DeletePostWorker.perform_async(@post.id)
+      # assert_delete_post_worker
+      if DeletePostWorker.jobs.size > 0
+        assert_not @post.deleted?
+      else
+        assert @post.deleted?
+      end
+    end
+    
+    assert_redirected_to posts_url
   end
 end
+

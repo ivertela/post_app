@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @my_posts = Post.where(user_id: current_user.id)
+    @my_posts = Post.with_deleted.where(user_id: current_user.id)
     @all_posts = Post.posted
   end
 

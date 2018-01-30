@@ -1,10 +1,11 @@
-<p id="notice"><%= notice %></p>
+
 
 <div>
+	<p>Avatar: <%=image_tag @user.avatar.url(:medium) %></p>
 	<p>Name: <%= @user.name %></p>
 	<p>Email: <%= @user.email %></p>
 </div>
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<%#= link_to 'Edit', edit_user_path(@user) %> 
 <%= link_to 'Back', users_path %>

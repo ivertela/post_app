@@ -1,6 +1,9 @@
 require 'test_helper'
 class DeletePostWorkerTest < MiniTest::Unit::TestCase
-  def test_example
-    skip "add some examples to (or delete) #{__FILE__}"
-  end
+	require 'sidekiq/testing'
+	Sidekiq::Testing.fake!
+
+	def perform(post_id)
+		Post.find(post_id).destroy
+	end
 end

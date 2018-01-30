@@ -5,6 +5,7 @@
       <th>Title</th>
       <th>Description</th>
       <th>State</th>
+      <th>Deleted_at</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
         <td><%= post.title %></td>
         <td><%= post.description %></td>
         <td><%= post.aasm_state %></td>
+        <td><%= post.deleted_at %></td>
         <td><%= post.pending? ? (link_to 'Published', published_path(post_id: post.id), method: :post) : "Published" %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>

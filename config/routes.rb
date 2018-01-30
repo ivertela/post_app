@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 	devise_for :users
-	resources :users do
+	resources :users, only: [:index, :show, :destroy] do
 		get 'soft_delete', to: 'users#soft_delete' 
 	end	
 	resources :posts

@@ -1,7 +1,7 @@
 class DeletePostWorker
   include Sidekiq::Worker
-
-  def perform(post)
-	Post.find(post).destroy
+  
+  def perform(post_id)
+	Post.find(post_id).destroy
   end
 end
