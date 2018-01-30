@@ -1,12 +1,13 @@
 require 'test_helper'
 
 class PostNotificationMailerTest < ActionMailer::TestCase
-  test "notify_user" do
-    mail = PostNotificationMailer.notify_user
-    assert_equal "Notify user", mail.subject
-    assert_equal ["to@example.org"], mail.to
-    assert_equal ["from@example.com"], mail.from
-    assert_match "Hi", mail.body.encoded
+	test "notify_user" do
+		mail = PostNotificationMailer.notify_user(
+		'i.vertela@dunice.net', 'Test title', 'Test text')
+		assert_equal "Create Post", mail.subject
+		assert_equal ["i.vertela@dunice.net"], mail.to
+		assert_equal ["suslik2995@yandex.ua"], mail.from
+    # assert_match "Hi", mail.body.encoded
   end
 
 end

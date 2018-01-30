@@ -1,3 +1,9 @@
 valid:
-  name: John
-  email: john@example.com
+  name: Nick
+  email: asd@asd.asd
+
+alice:
+  name: Qwe
+  email: qwe@qwe.qwe
+  encrypted_password: <%= Devise::Encryptor.digest(User, "12345678") %>
+  confirmed_at: <%= Time.now %>
