@@ -35,11 +35,13 @@ gem 'aasm'
 gem 'apipie-rails'
 gem 'devise'
 gem 'friendly_id'
+gem 'jquery-rails'
 # gem 'mandrill-api'
 gem 'paperclip'
 gem 'paranoia_uniqueness_validator', '3.0.0'
 gem 'paranoia', '~> 2.4'
 gem 'sidekiq'
+gem 'twitter-bootstrap-rails'
 
 
 group :development, :test do

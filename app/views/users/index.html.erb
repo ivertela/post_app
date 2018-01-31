@@ -1,35 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Users</h1>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th >Avatar</th>
+        <th >Name</th>
+        <th >Email</th>
+        <th >Deleted_at</th>
+        <th >Posted_post_count</th>
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th >Avatar</th>
-      <th >Name</th>
-      <th >Email</th>
-      <th >Deleted_at</th>
-      <th >Posted_post_count</th>
-      <th colspan="3">Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= image_tag user.avatar.url(:thumb) %></td>
-      <td><%= user.name %></td>
-      <td><%= user.email %></td>
-      <td><%= user.deleted_at %></td>
-      <td><%= user.posted_post_count %></td>
-      <td><%= link_to 'Show', user %></td>
-      <td><%= button_to 'Destroy', user_soft_delete_path(user) %></td>
-      <td><%= link_to 'Realy_destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= image_tag user.avatar.url(:thumb), class: 'img-circle' %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.deleted_at %></td>
+        <td><%= user.posted_post_count %></td>
+        <td><%= link_to 'Show', user, class: "btn btn-primary" %></td>
+        <td><%= button_to 'Destroy', user_soft_delete_path(user), class: 'btn btn-warning' %></td>
+        <td><%= link_to 'Realy_destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <br>
 
 <%#= link_to 'New User', new_user_path %>

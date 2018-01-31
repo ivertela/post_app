@@ -1,15 +1,12 @@
-<div class="container">
-  
 
-<div class="col-md-6">
+<div class="my-posts">
   <h1>My Posts</h1>
-<%= render 'table', posts: @my_posts %>
+  <%= render 'table', posts: @my_posts %>
 </div>
-<div class="col-md-6">
+<div class="posted-post">
   <h1>All Posts</h1>
-<%= render 'table', posts: @all_posts %>
+  <%= render 'table', posts: @all_posts %>
 </div>
-<br>
 
-<%= link_to 'New Post', new_post_path %>
-</div>
+<%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+
