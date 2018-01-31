@@ -3,7 +3,7 @@ valid:
   description: ValidDescription
   aasm_state: pending
   user: valid
-  
+
 one:
   title: MyString
   description: MyText
