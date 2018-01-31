@@ -1,13 +1,13 @@
 class User < ApplicationRecord
-  acts_as_paranoid without_default_scope: true
 
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  has_many :posts, dependent: :destroy
-
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders]
+  acts_as_paranoid without_default_scope: true
+
+  has_many :posts, dependent: :destroy
 
   validates_presence_of :email, :name
   validates :email, uniqueness: true
